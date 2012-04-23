@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+
+if (%w( -h --help -help help ) & ARGV).length > 0
+  puts "usage: dcssd [-hv]"
+  puts "starts dotcss server in the foreground. kill with <Control>C"
+  exit
+end
+
+if ARGV.include?('-v')
+  puts 'dcssd 1.0'
+  exit
+end
+
+require "webrick"
+
+dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
+  def do_GET(request, response)
+    file    = File.expand_path("#{request.path.gsub('/','')}")
+    body = "/* dotcss is working */\n"
+    body << File.read(file) if File.file?(file)
+
+    response.status = body.empty? ? 204 : 200
+
+    if origin = detect_origin(request)
+      response['Access-Control-Allow-Origin'] = origin
+    end
+
+    response['Content-Type'] = 'text/javascript'
+    response.body = body
+  end
+
+  def detect_origin(req)
+    path   = req.path
+    origin = req.header['origin']
+    search = path.gsub('/','').gsub(/\.js$/,'') + '$'
+
+    if origin.length == 1 && path.length != 1 && origin[0].match(search)
+      origin[0]
+    end
+  end
+end
+
+server = WEBrick::HTTPServer.new(:Port => 1243)
+server.mount('/', dotcss)
+
+%w( INT TERM ).each do |sig|
+  trap(sig) { server.shutdown }
+end
+
+server.start

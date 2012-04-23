@@ -1,0 +1,12 @@
+{
+  "name"        : "dotcss",
+  "version"     : "1.0",
+  "description" : "~/.css",
+  "content_scripts": [{
+    "all_frames": true,
+    "run_at"    : "document_start",
+    "matches"   : ["http://*/*", "https://*/*"],
+    "js"        : ["jquery.js", "dotcss.js"]
+  }],
+  "permissions": ["tabs"]
+}

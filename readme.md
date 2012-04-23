@@ -28,6 +28,16 @@ Chrome extensions can't access the local filesystem, so dotcss runs a tiny web s
 
 Multiple versions of Chrome installed? Drag `builds/dotcss.crx` to whichever is your favourite.
 
+## quick notes on css
+
+If your CSS isn't working, it means one of three things:
+
+1. Your selectors are off - by this, I mean either you're trying to style the wrong element, or your selector isn't specific enough to override the existing CSS
+2. Inline styles are preventing you from styling the element
+3. dotcss fucked up
+
+The first two are more likely than the third, but if you run into something weird, please file an issue and I'll try to help you.
+
 ## uninstall
 
     rake uninstall
