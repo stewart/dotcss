@@ -1,11 +1,11 @@
 {
   "name"        : "dotcss",
-  "version"     : "1.0",
+  "version"     : "1.0.1",
   "description" : "~/.css",
   "icons": { "48" : "icon48.png", "128" : "icon128.png" },
   "content_scripts": [{
     "all_frames": true,
-    "run_at"    : "document_idle",
+    "run_at"    : "document_start",
     "matches"   : ["http://*/*", "https://*/*"],
     "js"        : ["jquery.js", "dotcss.js"]
   }],
