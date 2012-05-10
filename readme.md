@@ -12,7 +12,7 @@ Chrome extensions can't access the local filesystem, so dotcss runs a tiny web s
 
 ## requires
 
-- OS X
+- OS X or Linux
 - Ruby 1.8 or newer
 - rake (`gem install rake`)
 - Google Chrome
