@@ -66,7 +66,7 @@ namespace :install do
       end
 
       puts "starting dcssd..."
-      command = "#{DAEMON_INSTALL_DIR}/dcssd > /dev/null 2> /dev/null &"
+      command = "exo-open #{launcher} > /dev/null 2> /dev/null &"
 
       if is_sudo
         sh "sudo -u #{ENV['SUDO_USER']} #{command}"
