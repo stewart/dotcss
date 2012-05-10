@@ -1,0 +1,12 @@
+
+[Desktop Entry]
+Type=Application
+Exec=<%= DAEMON_INSTALL_DIR %>/dcssd
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=dotcss
+Name=dotcss
+Comment[en_US]=Launches dotcss server.
+Comment=Launches dotcss server.
+Path=<%= File.join(ENV['HOME'], ".css") %>
