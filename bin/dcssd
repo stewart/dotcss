@@ -11,6 +11,10 @@ if ARGV.include?('-v')
   exit
 end
 
+if Dir.glob('*.css').empty? and not Dir.glob(File.join(ENV['HOME'], ".css/*.css")).empty?
+  Dir.chdir(File.join(ENV['HOME'], ".css"))
+end
+
 require "webrick"
 
 dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
