@@ -109,7 +109,7 @@ namespace :install do
   task :chrome do
     puts "Installing Google Chrome extension..."
     if is_linux
-      command = "google-chrome builds/dotcss.crx > /dev/null &"
+      command = "google-chrome builds/dotcss.crx > /dev/null 2>&1 | chromium-browser builds/dotcss.crx &"
       if is_sudo
         sh "sudo -u #{ENV['SUDO_USER']} #{command}"
       else
