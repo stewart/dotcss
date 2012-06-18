@@ -116,7 +116,7 @@ namespace :install do
         sh "#{command}"
       end
     else
-      sh "open -a 'Google Chrome' builds/dotcss.crx &"
+      sh "open -a 'Google Chrome' builds/dotcss.crx >/dev/null 2>&1 | open -a Chromium builds/dotcss.crx &"
     end
   end
 end
