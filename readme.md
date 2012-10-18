@@ -15,7 +15,7 @@ Chrome extensions can't access the local filesystem, so dotcss runs a tiny web s
 - OS X or Linux
 - Ruby 1.8 or newer
 - rake (`gem install rake`)
-- Google Chrome
+- Chrome or Chromium
 - `/usr/local/bin` in your `$PATH`
 - on Linux: `exo-open` (Can be found in [exo-utils](http://packages.ubuntu.com/search?keywords=exo-utils) on Ubuntu. Required until [Bug #378783 in xdg-utils](https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/378783) is fixed.)
 
