@@ -7,7 +7,7 @@ if (%w( -h --help -help help ) & ARGV).length > 0
 end
 
 if ARGV.include?('-v')
-  puts 'dcssd 1.0'
+  puts 'dcssd 1.1'
   exit
 end
 
@@ -19,9 +19,7 @@ require "webrick"
 
 dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
   def do_GET(request, response)
-    file    = File.expand_path("#{request.path.gsub('/','')}")
-    body = "/* dotcss is working */\n"
-    body << File.read(file) if File.file?(file)
+    body = build_body(request.path)
 
     response.status = body.empty? ? 204 : 200
 
@@ -29,8 +27,27 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
       response['Access-Control-Allow-Origin'] = origin
     end
 
-    response['Content-Type'] = 'text/javascript'
+    response['Content-Type'] = 'text/css'
     response.body = body
+  end
+
+  def build_body(path)
+    files = [File.expand_path('default.css')]
+    paths = path.gsub('/', '').split('.')
+
+    until paths.empty?
+      file = File.expand_path(paths.join('.'))
+      files << file if File.file?(file)
+      paths.shift
+    end
+
+    body = "/* dotcss is working */\n"
+
+    files.each do |file|
+      body << File.read(file) + "\n" if File.file?(file)
+    end
+
+    body
   end
 
   def detect_origin(req)
