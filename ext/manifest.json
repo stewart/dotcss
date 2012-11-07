@@ -9,5 +9,6 @@
     "matches"   : ["http://*/*", "https://*/*"],
     "js"        : ["jquery.js", "dotcss.js"]
   }],
-  "permissions": ["tabs"]
+  "permissions": ["tabs"],
+  "manifest_version": 2
 }
