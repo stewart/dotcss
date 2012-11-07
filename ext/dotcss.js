@@ -1,4 +1,13 @@
 $.ajax({
+  url: 'http://localhost:1243/default.css',
+  dataType: 'text',
+  success: function (data) {
+    var head = $("head");
+    $('<style></style>').appendTo(head).text(data);
+  }
+});
+
+$.ajax({
   url: 'http://localhost:1243/' + window.location.host.replace('www.', '') + '.css',
   dataType: 'text',
   success: function (data) {
