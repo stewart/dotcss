@@ -43,6 +43,18 @@ The first two are more likely than the third, but if you run into something weir
 
     rake uninstall
 
+## troubleshooting
+
+Attempting to run `rake install` within a tmux session in OSX will fail with the following error:
+
+```
+Could not open job overrides database at: /private/var/db/launchd.db/com.apple.launchd/overrides.plist: 13: Permission denied
+launchctl: Error unloading: com.averagestudios.dotcss
+```
+
+This is because running `launchctl` within a tmux session will bootstrap in the root context. Avoid this by exiting your tmux session first.
+
+
 ## thanks
 
 - Chris Wanstrath for [dotjs](http://github.com/defunkt/dotjs), which 90% of this is based on.
