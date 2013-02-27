@@ -1,5 +1,5 @@
 $.ajax({
-  url: 'http://localhost:1243/' + window.location.host.replace('www.', '') + '.css',
+  url: 'https://localhost:1243/' + window.location.host.replace('www.', '') + '.css',
   dataType: 'text',
   success: function (data) {
     var head = $("head");
