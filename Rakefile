@@ -98,8 +98,8 @@ namespace :install do
 
   desc 'Install Chrome/Chromium extension'
   task :chrome do
-    puts '', "  \e[31mIMPORTANT!\e[0m Drag builds/dotcss.crx to Chrome/Chromium."
-    puts "  I can't install it for you.", ''
+    puts "", "\e[31mIMPORTANT!\e[0m Install the Google Chrome extension:"
+    puts "http://bit.ly/dotcss_extension", ""
   end
 end
 
