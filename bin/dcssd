@@ -16,6 +16,7 @@ if Dir.glob('*.css').empty? and not Dir.glob(File.join(ENV['HOME'], ".css/*.css"
 end
 
 require "webrick"
+require "webrick/https"
 
 dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
   def do_GET(request, response)
@@ -61,7 +62,22 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
   end
 end
 
-server = WEBrick::HTTPServer.new(:Port => 1243)
+ssl_info = DATA.read
+ssl_cert = ssl_info.scan(/(-----BEGIN CERTIFICATE-----.+?-----END CERTIFICATE-----)/m)[0][0]
+ssl_key  = ssl_info.scan(/(-----BEGIN RSA PRIVATE KEY-----.+?-----END RSA PRIVATE KEY-----)/m)[0][0]
+
+server_options = {
+  :BindAddress => "127.0.0.1",
+  :Port => 1243,
+  :AccessLog => [],
+  :SSLEnable => true,
+  :SSLVerifyClient => OpenSSL::SSL::VERIFY_NONE,
+  :SSLPrivateKey => OpenSSL::PKey::RSA.new(ssl_key),
+  :SSLCertificate => OpenSSL::X509::Certificate.new(ssl_cert),
+  :SSLCertName => [["CN", WEBrick::Utils::getservername]],
+}
+
+server = WEBrick::HTTPServer.new(server_options)
 server.mount('/', dotcss)
 
 %w( INT TERM ).each do |sig|
@@ -69,3 +85,33 @@ server.mount('/', dotcss)
 end
 
 server.start
+
+__END__
+-----BEGIN CERTIFICATE-----
+MIICBTCCAW4CCQCYUv5Jf6YCxjANBgkqhkiG9w0BAQUFADBHMQswCQYDVQQGEwJB
+VTETMBEGA1UECBMKU29tZS1TdGF0ZTEPMA0GA1UEChMGZG90Y3NzMRIwEAYDVQQD
+Ewlsb2NhbGhvc3QwHhcNMTMwMjI3MjI0MTAwWhcNMjMwMjI1MjI0MTAwWjBHMQsw
+CQYDVQQGEwJBVTETMBEGA1UECBMKU29tZS1TdGF0ZTEPMA0GA1UEChMGZG90Y3Nz
+MRIwEAYDVQQDEwlsb2NhbGhvc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+ALUMJvYJFHkswiFq+mKzWiZarsXNLwpg9QtuIqA4N2NCwW7vVAnYlE+bTPXliBtM
+S10G2kOSq7TUlthRlud0gPx6ENtW4xXqcPRJDxLR1LcLczKG/Mdw7VJ+ZWaRT5+Q
+LRJ/Hrf5B/9jUbgW6/O75AD4V4QYUjPjpMDEwWim1AthAgMBAAEwDQYJKoZIhvcN
+AQEFBQADgYEAa85EpiAtvlQ1nStewatT/ALzK19EqKkxmCaIo9vZUHYSNZORsLIY
+taKc1kzCWZn/4OUoRtC4h0WYbVeSZjQkofQJpPSizOejoB5X24A1jkk/cm/+B3e6
+GelT0sC3W3tpxKcPXE44A2DtebOCBoeQTktB3EoOXH0+t08CfxWxFMs=
+-----END CERTIFICATE-----
+-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQC1DCb2CRR5LMIhavpis1omWq7FzS8KYPULbiKgODdjQsFu71QJ
+2JRPm0z15YgbTEtdBtpDkqu01JbYUZbndID8ehDbVuMV6nD0SQ8S0dS3C3MyhvzH
+cO1SfmVmkU+fkC0Sfx63+Qf/Y1G4Fuvzu+QA+FeEGFIz46TAxMFoptQLYQIDAQAB
+AoGASNE9bmGSiXY2EmjLkh0e2iRI/SecjukWReWjKZvSsyqrUCoUO+2PIUGOP6x1
+BL235g+Wg+0fAJksno6aSjdylOt31GmrVUm8hzt4CisAah888Hcc/Asnox7orbbe
+3T42PlwINKwneRZkTW7ZjCQaIxsz+TyMCWmirvRsAHk9XdECQQDvy3RVo2tvrab+
+aMxeyN3bwWvgFSRHbCAUUxZXnJ9m1QsfmWUELbNzydBponNx4sW+yFf5WWeMdKBt
+0lXpU+NFAkEAwUhYpUcsfAIA1CF06VVbkvD5pkJskb9LCe8SbpXfgkM/yasE9xXH
+1WlQUCYSV6NI3fHXsGXCE//DqAyjQNQbbQJATBg3MZnrVQQ5MxCUkhuR89OcZP6w
+hY21XF3FgEXue5ZtsjheSwYppTvMzEjF88Tv1YwEBtetOXAlHNSbeLCrNQJBAJao
+WdCa5eXTeengGk02p6amBzK9W/tPbKJVo7xnPk0/Nh1wHPKsG5QR/vQ6eNmvAUFf
+HYz2BI2qM0xubWI+8xECQA9rZOmA5hCdyWZDf2eCWr5/enLahjUvkjbnVcKZOOiA
+SqzM4704XtkQ6yWol2vi2a2d3FdVAbD8NqFRrnMSKUU=
+-----END RSA PRIVATE KEY-----

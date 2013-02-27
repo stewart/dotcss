@@ -39,7 +39,7 @@ namespace :install do
 
   task :done do
     puts ''
-    if system 'curl http://localhost:1243 &> /dev/null'
+    if system 'curl -k https://localhost:1243 &> /dev/null'
       puts '  dotcss installation worked!'
       puts '  drop files like github.com.css in ~/.css and have fun tweaking the web!'
     else
