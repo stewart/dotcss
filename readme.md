@@ -24,6 +24,8 @@ Chrome extensions can't access the local filesystem, so dotcss runs a tiny web s
     git clone http://github.com/stewart/dotcss.git
     cd dotcss
     rake install
+    
+And install the chrome extension [http://bit.ly/dotcss_extension](http://bit.ly/dotcss_extension)
 
 ## chromium vs. google chrome vs. chrome canary
 
