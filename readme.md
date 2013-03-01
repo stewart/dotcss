@@ -1,60 +1,66 @@
 # dotcss
 
-dotcss is a Google Chrome extension that imports `.css` files in `~/.css` based on their filename.
+dotcss is two(2) things:
 
-If you go to `https://github.com`, dotcss will load `~/.css/github.com.css`.
+  1. A [tiny web server][server] that runs on your machine, serving CSS files
+     out of `~/.css`
+  2. A [Chrome extension][extension] that fetches these CSS files and injects
+     them based on their filename.
 
-This makes it super simple to change and improve the look of your favourite pages.
+The files are requested on a per-page basics, based on the hostname. For
+example, if you go to [https://github.com](https://github.com),
+`~/.css/github.com.css` would be injected into the page.
 
-## how it works
+This makes it super simple and easy to change and improve the look of your favorite sites.
 
-Chrome extensions can't access the local filesystem, so dotcss runs a tiny web server on port 1243 that serves files out of the `~/.css` folder
+## How it works
 
-## requires
+Chrome extensions can't access the filesystem, so dotcss runs a [tiny web
+server][server] on port 1243 that serves files out of the `~/.css` folder.
+
+## Requirements
 
 - OS X or Linux
 - Ruby 1.8 or newer
 - rake (`gem install rake`)
 - Chrome or Chromium
 - `/usr/local/bin` in your `$PATH`
-- on Linux: `exo-open` (Can be found in [exo-utils](http://packages.ubuntu.com/search?keywords=exo-utils) on Ubuntu. Required until [Bug #378783 in xdg-utils](https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/378783) is fixed.)
+- on Linux: `exo-open` (Can be found in [exo-utils][] on Ubuntu. Required until
+  [Bug #378783 in xdg-utils][exo-bug] is fixed.)
 
-## install
+## Installation
 
     git clone http://github.com/stewart/dotcss.git
     cd dotcss
     rake install
 
-## chromium vs. google chrome vs. chrome canary
+Then, go grab the [Chrome extension][extension] and have fun!
 
-Multiple versions of Chrome installed? Drag `builds/dotcss.crx` to whichever is your favourite.
-
-## quick notes on css
-
-If your CSS isn't working, it means one of three things:
-
-1. Your selectors are off - by this, I mean either you're trying to style the wrong element, or your selector isn't specific enough to override the existing CSS
-2. Inline styles are preventing you from styling the element
-3. dotcss fucked up
-
-The first two are more likely than the third, but if you run into something weird, please file an issue and I'll try to help you.
-
-## uninstall
+## Uninstallation
 
     rake uninstall
 
-## troubleshooting
+## Chrome/Chromium/Chrome Canary
 
-Attempting to run `rake install` within a tmux session in OSX will fail with the following error:
+If you have multiple versions of Chrome installed, just install the
+[extension][] in whichever one you fancy.
 
-```
-Could not open job overrides database at: /private/var/db/launchd.db/com.apple.launchd/overrides.plist: 13: Permission denied
-launchctl: Error unloading: com.averagestudios.dotcss
-```
+## Troubleshooting
 
-This is because running `launchctl` within a tmux session will bootstrap in the root context. Avoid this by exiting your tmux session first.
+Attempting to run `rake install` within a tmux session may fail with the following error:
 
+    Could not open job overrides database at: /private/var/db/launchd.db/com.apple.launchd/overrides.plist: 13: Permission denied
+    launchctl: Error unloading: com.averagestudios.dotcss
 
-## thanks
+To avoid this, quit tmux before installing dotcss.
 
-- Chris Wanstrath for [dotjs](http://github.com/defunkt/dotjs), which 90% of this is based on.
+## Thanks
+
+- [Chris Wanstrath][defunkt] for [dotjs][], which 90% of this is based on.
+
+[server]: https://github.com/stewart/dotcss/blob/master/bin/dcssd
+[extension]: http://j.mp/dotcss_chrome_ext
+[exo-utils]: http://packages.ubuntu.com/search?keywords=exo-utils
+[exo-bug]: https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/378783
+[defunkt]: https://github.com/defunkt
+[dotjs]: https://github.com/defunkt/dotjs

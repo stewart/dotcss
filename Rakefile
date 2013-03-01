@@ -98,8 +98,10 @@ namespace :install do
 
   desc 'Install Chrome/Chromium extension'
   task :chrome do
-    puts '', "  \e[31mIMPORTANT!\e[0m Drag builds/dotcss.crx to Chrome/Chromium."
-    puts "  I can't install it for you.", ''
+    puts <<-EOS.chomp
+  Now you need to install the dotcss extension for Chrome.
+  You can get it here: http://j.mp/dotcss_chrome_ext
+    EOS
   end
 end
 
@@ -121,6 +123,7 @@ namespace :uninstall do
     puts ''
     puts '  I will not remove:'
     puts '  1. ~/.css'
+    puts '  2. The dotcss Chrome extension'
     puts ''
     print '  Ok? (y/n) '
 
@@ -168,7 +171,7 @@ namespace :uninstall do
   desc 'Uninstall Chrome extension'
   task :chrome do
     puts "  \e[1mplease uninstall the chrome extension manually:\e[0m"
-    puts '  chrome/chromium > window > extensions > dotcss > uninstall'
+    puts '  chrome > window > extensions > dotcss > uninstall'
   end
 end
 

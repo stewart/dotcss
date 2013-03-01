@@ -61,7 +61,12 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
   end
 end
 
-server = WEBrick::HTTPServer.new(:Port => 1243)
+server_options = {
+  :BindAddress => "127.0.0.1",
+  :Port => 1243,
+}
+
+server = WEBrick::HTTPServer.new(server_options)
 server.mount('/', dotcss)
 
 %w( INT TERM ).each do |sig|
