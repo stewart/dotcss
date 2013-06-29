@@ -16,19 +16,19 @@ namespace :install do
     puts '  dotcss'
     puts '  ------'
     puts "  With your permission, I'll install:"
-    puts "  1. The dcssd daemon in #{DAEMON_INSTALL_DIR}"
+    puts "    1. The dcssd daemon in #{DAEMON_INSTALL_DIR}"
     if is_linux
-      puts "  2. dotcss.desktop in ~/.config/autostart"
+      puts "    2. dotcss.desktop in ~/.config/autostart"
     else
-      puts "  2. ca.stwrt.dotcss.plist in ~/Library/LaunchAgents"
+      puts "    2. ca.stwrt.dotcss.plist in ~/Library/LaunchAgents"
     end
     puts ''
-    puts '  Ok? (y/n)'
+    puts '  Ok? (y|n)'
 
     begin
       until %w( k ok y yes n no ).include?(answer = $stdin.gets.chomp.downcase)
-        puts '  (psst... please type y or n)'
-        puts '  Install dotcss? (y/n)'
+        puts '  Please type y/yes or n/no.'
+        puts '  Install dotcss? (y|n)'
       end
     rescue Interrupt
       exit 1
@@ -41,10 +41,10 @@ namespace :install do
     puts ''
     if system 'curl http://localhost:1243 &> /dev/null'
       puts '  dotcss installation worked!'
-      puts '  drop files like github.com.css in ~/.css and have fun tweaking the web!'
+      puts '  Drop files like github.com.css in ~/.css and have fun tweaking the web!'
     else
       puts '  dotcss installation failed!'
-      puts '  check Console.app or open an issue on GitHub'
+      puts '  Check Console.app or open an issue on GitHub'
     end
   end
 
@@ -98,10 +98,8 @@ namespace :install do
 
   desc 'Install Chrome/Chromium extension'
   task :chrome do
-    puts <<-EOS.chomp
-  Now you need to install the dotcss extension for Chrome.
-  You can get it here: http://j.mp/dotcss_chrome_ext
-    EOS
+    puts "  Now you need to install the dotcss extension for Chrome."
+    puts "  You can get it here: http://stwrt.ca/dotcss"
   end
 end
 
@@ -114,23 +112,23 @@ namespace :uninstall do
   task :prompt do
     puts ''
     puts '  I will remove:'
-    puts "  1. dcssd(1) from #{DAEMON_INSTALL_DIR}"
+    puts "    1. dcssd(1) from #{DAEMON_INSTALL_DIR}"
     if is_linux
-      puts "  2. dotcss.desktop from ~/.config/autostart"
+      puts "    2. dotcss.desktop from ~/.config/autostart"
     else
-      puts "  2. ca.stwrt.dotcss.plist from ~/Library/LaunchAgents"
+      puts "    2. ca.stwrt.dotcss.plist from ~/Library/LaunchAgents"
     end
     puts ''
     puts '  I will not remove:'
-    puts '  1. ~/.css'
-    puts '  2. The dotcss Chrome extension'
+    puts '    1. ~/.css'
+    puts '    2. The dotcss Chrome extension'
     puts ''
-    print '  Ok? (y/n) '
+    print '  Ok? (y|n)'
 
     begin
       until %w( k ok y yes n no ).include?(answer = $stdin.gets.chomp.downcase)
-        puts '  (psst... please type y or n)'
-        puts '  Uninstall dotcss? (y/n)'
+        puts '  Please type y/yes or n/no.'
+        puts '  Install dotcss? (y|n)'
       end
     rescue Interrupt
       exit 1
@@ -146,7 +144,7 @@ namespace :uninstall do
       puts '  dcssd is still running.'
     else
       puts '  dotcss uninstall worked!'
-      puts '  your ~/.css folder was not touched.'
+      puts '  Your ~/.css folder was not touched.'
     end
   end
 
@@ -170,8 +168,9 @@ namespace :uninstall do
 
   desc 'Uninstall Chrome extension'
   task :chrome do
-    puts "  \e[1mplease uninstall the chrome extension manually:\e[0m"
-    puts '  chrome > window > extensions > dotcss > uninstall'
+    puts ''
+    puts "  Please uninstall the chrome extension manually:"
+    puts '  Chrome > Window > Extensions > dotcss > Uninstall.'
   end
 end
 
