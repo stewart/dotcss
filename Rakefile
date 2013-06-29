@@ -20,7 +20,7 @@ namespace :install do
     if is_linux
       puts "  2. dotcss.desktop in ~/.config/autostart"
     else
-      puts "  2. com.averagestudios.dotcss.plist in ~/Library/LaunchAgents"
+      puts "  2. ca.stwrt.dotcss.plist in ~/Library/LaunchAgents"
     end
     puts ''
     puts '  Ok? (y/n)'
@@ -55,7 +55,7 @@ namespace :install do
       install_dir = File.expand_path('~/.config/autostart')
       launcher = File.join(install_dir, autorun_script)
     else
-      autorun_script = 'com.averagestudios.dotcss.plist'
+      autorun_script = 'ca.stwrt.dotcss.plist'
       install_dir = File.expand_path('~/Library/LaunchAgents')
     end
 
@@ -118,7 +118,7 @@ namespace :uninstall do
     if is_linux
       puts "  2. dotcss.desktop from ~/.config/autostart"
     else
-      puts "  2. com.averagestudios.dotcss.plist from ~/Library/LaunchAgents"
+      puts "  2. ca.stwrt.dotcss.plist from ~/Library/LaunchAgents"
     end
     puts ''
     puts '  I will not remove:'
@@ -156,7 +156,7 @@ namespace :uninstall do
       launcher = File.expand_path('~/.config/autostart/dotcss.desktop')
       system "kill $(ps aux | grep '^#{ENV['SUDO_USER']}' | grep '.*dcssd' | awk '{print $2}') 2> /dev/null; true"
     else
-      launcher = File.expand_path('~/Library/LaunchAgents/com.averagestudios.dotcss.plist')
+      launcher = File.expand_path('~/Library/LaunchAgents/ca.stwrt.dotcss.plist')
       system "launchctl unload #{launcher}"
     end
 

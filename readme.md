@@ -50,7 +50,7 @@ If you have multiple versions of Chrome installed, just install the
 Attempting to run `rake install` within a tmux session may fail with the following error:
 
     Could not open job overrides database at: /private/var/db/launchd.db/com.apple.launchd/overrides.plist: 13: Permission denied
-    launchctl: Error unloading: com.averagestudios.dotcss
+    launchctl: Error unloading: ca.stwrt.dotcss
 
 To avoid this, quit tmux before installing dotcss.
 

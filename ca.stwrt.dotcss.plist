@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.averagestudios.dotcss</string>
+  <string>ca.stwrt.dotcss</string>
   <key>KeepAlive</key>
   <true/>
   <key>ProgramArguments</key>
