@@ -36,6 +36,8 @@ server][server] on port 1243 that serves files out of the `~/.css` folder.
 
 Then, go grab the [Chrome extension][extension] and have fun!
 
+If you use Safari, [@maman][] has a [pretty cool extension][safari] you can use.
+
 ## Uninstallation
 
     rake uninstall
@@ -64,3 +66,5 @@ To avoid this, quit tmux before installing dotcss.
 [exo-bug]: https://bugs.launchpad.net/ubuntu/+source/xdg-utils/+bug/378783
 [defunkt]: https://github.com/defunkt
 [dotjs]: https://github.com/defunkt/dotjs
+[@maman]: https://github.com/maman
+[safari]: https://github.com/maman/dotcss.safariextension
