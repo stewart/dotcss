@@ -22,11 +22,7 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
     body = build_body(request.path)
 
     response.status = body.empty? ? 204 : 200
-
-    if origin = detect_origin(request)
-      response['Access-Control-Allow-Origin'] = origin
-    end
-
+    response['Access-Control-Allow-Origin'] = '*'
     response['Content-Type'] = 'text/css'
     response.body = body
   end
@@ -48,16 +44,6 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
     end
 
     body
-  end
-
-  def detect_origin(req)
-    path   = req.path
-    origin = req.header['origin']
-    search = path.gsub('/','').gsub(/\.js$/,'') + '$'
-
-    if origin.length == 1 && path.length != 1 && origin[0].match(search)
-      origin[0]
-    end
   end
 end
 
