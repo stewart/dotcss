@@ -8,7 +8,7 @@
     "all_frames" : true,
     "run_at"     : "document_start",
     "matches"    : ["http://*/*", "https://*/*"],
-    "js"         : ["jquery.js", "dotcss.js"]
+    "js"         : ["dotcss.js"]
   }],
   "permissions": ["tabs"]
 }
