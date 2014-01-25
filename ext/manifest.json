@@ -3,7 +3,10 @@
   "manifest_version" : 2,
   "version"          : "2.1.0",
   "description"      : "~/.css",
-  "icons": { "48" : "icon48.png", "128" : "icon128.png" },
+  "icons": {
+     "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
   "content_scripts": [{
     "all_frames" : true,
     "run_at"     : "document_start",
