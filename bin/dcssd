@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-if (%w( -h --help -help help ) & ARGV).length > 0
-  puts "usage: dcssd [-hv]"
-  puts "starts dotcss server in the foreground. kill with <Control>C"
+if (%w( -h --help help ) & ARGV).length > 0
+  puts "Usage: dcssd [-hv]"
+  puts "Starts dotcss server in the foreground. Kill with Control+C."
   exit
 end
 
-if ARGV.include?('-v')
-  puts 'dcssd 1.1'
+if (%w( -v --version version ) & ARGV).length > 0
+  puts 'dcssd 2.1.0'
   exit
 end
 
