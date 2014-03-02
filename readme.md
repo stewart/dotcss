@@ -34,6 +34,14 @@ server][server] on port 1243 that serves files out of the `~/.css` folder.
     cd dotcss
     rake install
 
+Now open https://localhost:1243 in Chrome and follow these steps:
+
+- Click the "X" Padlock icon in the address bar
+- Click "Certificate Information"
+- Drag the large cert icon to your desktop
+- Open it with Keychain
+- Configure its *Trust* section as shown: http://cl.ly/Pdny
+
 Then, go grab the [Chrome extension][extension] and have fun!
 
 If you use Safari, [@maman][] has a [pretty cool extension][safari] you can use.
