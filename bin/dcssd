@@ -31,7 +31,7 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
   end
 
   def build_body(path)
-    files = [File.expand_path('default.css')]
+    files = []
     paths = path.gsub('/', '').split('.')
 
     until paths.empty?
@@ -39,6 +39,11 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
       files << file if File.file?(file)
       paths.shift
     end
+
+    files.sort_by! { |f| f.length }
+
+    # Default CSS to the front of the line!
+    files.unshift File.expand_path('default.css')
 
     body = "/* dotcss is working */\n"
 
