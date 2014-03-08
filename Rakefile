@@ -39,7 +39,7 @@ namespace :install do
 
   task :done do
     puts ''
-    if system 'curl http://localhost:1243 &> /dev/null'
+    if system 'curl https://localhost:1243 &> /dev/null'
       puts '  dotcss installation worked!'
       puts '  Drop files like github.com.css in ~/.css and have fun tweaking the web!'
     else
@@ -139,7 +139,7 @@ namespace :uninstall do
 
   task :done do
     puts ''
-    if system 'curl http://localhost:1243 2> /dev/null > /dev/null'
+    if system 'curl https://localhost:1243 2> /dev/null > /dev/null'
       puts '  dotcss uninstall failed!'
       puts '  dcssd is still running.'
     else
