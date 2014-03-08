@@ -7,7 +7,7 @@ if (%w( -h --help help ) & ARGV).length > 0
 end
 
 if (%w( -v --version version ) & ARGV).length > 0
-  puts 'dcssd 2.1.0'
+  puts 'dcssd 2.2.0'
   exit
 end
 
