@@ -90,8 +90,14 @@ namespace :install do
 
   desc 'Create ~/.css'
   task :create_dir do
-    if !File.directory? css_dir = File.join(ENV['HOME'], '.css')
+    css_dir = File.join(ENV['HOME'], '.css')
+    if !File.directory?(css_dir)
       mkdir css_dir
+
+      if is_sudo
+        system "chown -R #{ENV["SUDO_USER"]} #{css_dir}"
+      end
+
       chmod 0755, css_dir
     end
   end
