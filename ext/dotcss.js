@@ -1,5 +1,5 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://localhost:1243/' + window.location.host.replace(/^www\./, '') + '.css');
+xhr.open('GET', 'https://localhost:1243/' + window.location.host.replace(/^www\./, '') + '.css');
 
 xhr.onreadystatechange = function() {
   if(xhr.readyState !== 4) {
