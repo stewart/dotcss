@@ -50,8 +50,6 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
       files.unshift File.expand_path('default.css')
     end
 
-    p files
-
     body = "/* dotcss is working */\n"
 
     files.each do |file|
