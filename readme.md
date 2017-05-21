@@ -64,6 +64,17 @@ Attempting to run `rake install` within a tmux session may fail with the followi
 
 To avoid this, quit tmux before installing dotcss.
 
+## Non-Inheriting Stylesheets
+
+If you'd like to avoid inheriting from parent CSS files, give your CSS file
+a name of `_{domain}.css`.
+
+For example, on https://gist.github.com, by default, `gist.github.com.css` will
+be loaded along with `github.com.css` and `default.css`.
+
+But if `_gist.github.com.css` exists in the `~/.css` directory, it will be
+loaded by itself.
+
 ## Thanks
 
 - [Chris Wanstrath][defunkt] for [dotjs][], which 90% of this is based on.

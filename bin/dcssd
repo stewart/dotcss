@@ -34,16 +34,21 @@ dotcss = Class.new(WEBrick::HTTPServlet::AbstractServlet) do
     files = []
     paths = path.gsub('/', '').split('.')
 
-    until paths.empty?
-      file = File.expand_path(paths.join('.'))
-      files << file if File.file?(file)
-      paths.shift
+    # if subdomain .css file is marked as non-inheriting
+    if File.file?(file = File.expand_path("_" + paths.join('.')))
+      files << file
+    else
+      until paths.empty?
+        file = File.expand_path(paths.join('.'))
+        files << file if File.file?(file)
+        paths.shift
+      end
+
+      files.sort_by! { |f| f.length }
+
+      # Default CSS to the front of the line!
+      files.unshift File.expand_path('default.css')
     end
-
-    files.sort_by! { |f| f.length }
-
-    # Default CSS to the front of the line!
-    files.unshift File.expand_path('default.css')
 
     body = "/* dotcss is working */\n"
 
